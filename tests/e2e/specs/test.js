@@ -2,7 +2,12 @@
 
 describe('My First Test', () => {
   it('Visits the app root url', () => {
+    cy.server()
+    cy.route('https://jsonplaceholder.typicode.com/posts/1', {
+      title: 'This is a stubbed title'
+    })
+
     cy.visit('/')
-    cy.contains('h1', 'Welcome to Your Vue.js App')
+    cy.contains('div', 'This is a stubbed title')
   })
 })

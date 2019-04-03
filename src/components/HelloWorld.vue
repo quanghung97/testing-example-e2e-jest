@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    Title: {{ post.title }}
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -33,10 +34,21 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      post: {}
+    }
+  },
+  async created () {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
+    this.post = response.data
   }
 }
 </script>
